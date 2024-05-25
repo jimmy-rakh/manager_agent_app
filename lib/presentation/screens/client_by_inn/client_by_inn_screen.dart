@@ -52,6 +52,7 @@ class ClientByInnScreen extends StatelessWidget {
                             }),
                       ]),
                 )
+
           );
         });
   }

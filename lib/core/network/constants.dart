@@ -1,6 +1,6 @@
 class NetworkConstants {
   static String okansBaseUrl = 'https://test-api.okans.uz';
-  static String baseApiUrl = 'https://test-api.okans.uz/v1/clients/';
+  static String baseApiUrl = 'https://test-api.okans.uz/v1/rmanagers/';
   static Duration connectTimeout = const Duration(seconds: 10000);
   static Duration receiveTimeout = const Duration(seconds: 10000);
 
@@ -8,7 +8,7 @@ class NetworkConstants {
   static String allPopularProducts = '${baseApiUrl}popular_products_all/';
   static String posters = '${baseApiUrl}posters/';
   static String addOrder = '${baseApiUrl}add_order/';
-  static String users = '${baseApiUrl}client/';
+  static String users = '${baseApiUrl}manager/';
   static String createUser = '${users}create/';
   static String deleteUser = '${users}delete/';
   static String checkUser = '${users}is_log/';
@@ -23,10 +23,10 @@ class NetworkConstants {
   static String cart = '${baseApiUrl}cart/';
   static String checkOrder = '${baseApiUrl}order_check/';
   static String storeCategories = '${baseApiUrl}provider_cat';
-  static String subCategories = '${baseApiUrl}category/subcategories/';
+  static String subCategories = '${baseApiUrl}categories/category/subcategories/';
   static String categories = '${baseApiUrl}categories';
-  static String login = '${baseApiUrl}client/login/';
-  static String logOut = '${baseApiUrl}client/';
+  static String login = '${baseApiUrl}manager/login/';
+  static String logOut = '${baseApiUrl}manager/login/';
   static String addFavorite = '${baseApiUrl}favourites/';
   static String deleteFavorite = '${baseApiUrl}del_favourite/';
   static String fetchOrders = '${baseApiUrl}orders/';
@@ -59,5 +59,6 @@ class NetworkConstants {
   static String createTemplateOrder = '$templates{id}/order-create/';
   static String addReview = '$products{id}/comments/';
   static String points = '${baseApiUrl}points/';
+  static String clients = '${baseApiUrl}clients/';
   static String subcategoryProducts = '$baseApiUrl{id}/subcategories/products';
 }

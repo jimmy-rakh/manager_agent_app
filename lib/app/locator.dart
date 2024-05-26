@@ -27,6 +27,8 @@ import 'package:bingo/domain/services/search_service/search_service.dart';
 import 'package:bingo/domain/services/templates/templates_service.dart';
 import 'package:stacked/stacked_annotations.dart';
 
+import '../domain/services/client_service.dart';
+
 final getIt = StackedLocator.instance;
 
 Future<void> setUpLocator({
@@ -61,6 +63,7 @@ Future<void> setUpLocator({
   getIt.registerLazySingleton(() => SearchService());
   getIt.registerLazySingleton(() => NotificationService());
   getIt.registerLazySingleton(() => TemplateService());
+  getIt.registerLazySingleton(() => ClientService());
 
   // REPOSITORIES
   getIt.registerLazySingleton(() => AuthRepositoryImpl());

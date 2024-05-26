@@ -67,7 +67,6 @@ class CategoriesRouterViewModel extends ReactiveViewModel {
         search(loadMore: true);
       }
     });
-    searchAutocomplete();
   }
 
   onSearch(String value, {bool onValueSearch = false}) async {

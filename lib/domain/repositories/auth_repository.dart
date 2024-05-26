@@ -13,6 +13,8 @@ import 'package:bingo/data/models/user/response/balance_model.dart';
 import 'package:bingo/data/sources/local/storage.dart';
 import 'package:bingo/data/sources/network/auth_api.dart';
 
+import '../../data/models/client/client.dart';
+
 abstract class AuthRepository {
   UserStatus getUserStatus();
 
@@ -31,6 +33,8 @@ abstract class AuthRepository {
   Future<DefaultResponse> requestCode(LoginRequest request);
 
   Future<UserModel> getProfileData();
+
+  Future<Client> getClientData(int? inn);
 
   Future<DefaultResponse> createUser(CreateUserRequest request);
 
@@ -96,6 +100,15 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<UserModel> getProfileData() async {
     try {
       return await _authApi.getProfileData();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Client> getClientData(int? inn) async {
+    try {
+      return await _authApi.getClientData(inn);
     } catch (e) {
       rethrow;
     }

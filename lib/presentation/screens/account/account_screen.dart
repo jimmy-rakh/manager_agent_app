@@ -28,7 +28,7 @@ class AccountScreen extends StatelessWidget {
             appBar: CustomAppBar(
               title: 'profile.profile_title'.tr(),
               textStyle: Theme.of(context).textTheme.titleLarge,
-              showLeading: false,
+              showLeading: true,
               // actions: [
               //   Padding(
               //     padding: const EdgeInsets.only(right: 16, top: 8),

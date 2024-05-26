@@ -43,7 +43,6 @@ class AccountViewModel extends ReactiveViewModel {
     setBusy(true);
     try {
       await _authService.getProfileData();
-      await _authService.fetchBalance();
     } catch (e) {
       NavigationService.showErrorToast(e.toString());
       setError(true);

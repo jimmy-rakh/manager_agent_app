@@ -58,7 +58,7 @@ class _CategoryCardState extends State<CategoryCard> {
             ? ListView.separated(
                 padding: EdgeInsets.zero,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: widget.category.subCategories!.length,
+                itemCount: widget.category.subCategories?.length ?? 0,
                 shrinkWrap: true,
                 itemBuilder: (context, index) => GestureDetector(
                   onTap: () => router.push(
@@ -76,7 +76,7 @@ class _CategoryCardState extends State<CategoryCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          widget.category.subCategories![index].name!,
+                          widget.category.subCategories![index].name ?? 'без имени',
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
                         const Icon(IconlyLight.arrow_right_2)

@@ -13,7 +13,7 @@ class CategoriesDto {
   @HiveField(3)
   List<CategoriesDto>? subCategories;
 
-  CategoriesDto({this.id, this.name, this.imageUrl, this.subCategories});
+  CategoriesDto({this.id, this.name, this.imageUrl, this.subCategories = const []});
 
   CategoriesDto.fromJson(Map<String, dynamic> json) {
     id = json['id'];

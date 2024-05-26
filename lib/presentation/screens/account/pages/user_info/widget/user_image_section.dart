@@ -33,7 +33,7 @@ class UserImageSection extends ViewModelWidget<UserInfoViewModel> {
                 style: Theme.of(context).textTheme.labelMedium!.copyWith(
                       color: AppColors.grey,
                     )),
-            Text('user_types.${viewModel.user.type!}'.tr()),
+            Text('user_types.${viewModel.user.type}'.tr()),
           ],
         )
       ],

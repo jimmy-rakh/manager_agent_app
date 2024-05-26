@@ -70,14 +70,19 @@ class AppRouter extends _$AppRouter {
             AutoRoute(page: OrdersProductRoute.page),
             AutoRoute(page: OrdersOrderRoute.page)
           ]),
-          AutoRoute(page: AccountRouterRoute.page, children: [
-            AutoRoute(path: '', page: AccountRoute.page),
-            AutoRoute(page: UserInfoRoute.page),
-            AutoRoute(page: AddressRoute.page),
-            AutoRoute(page: FavoritesRoute.page),
-            AutoRoute(page: SettingsRoute.page),
-          ]),
         ]),
+    AutoRoute(page: CategoriesRouterRoute.page, children: [
+      AutoRoute(path: '', page: CategoriesRoute.page),
+      AutoRoute(page: CategoryProductRoute.page),
+      AutoRoute(page: SpecificProductsRoute.page),
+    ]),
+    AutoRoute(page: AccountRouterRoute.page, children: [
+      AutoRoute(path: '', page: AccountRoute.page),
+      AutoRoute(page: UserInfoRoute.page),
+      AutoRoute(page: AddressRoute.page),
+      AutoRoute(page: FavoritesRoute.page),
+      AutoRoute(page: SettingsRoute.page),
+    ]),
         AutoRoute(page: CheckoutRoute.page),
         AutoRoute(page: ProductRoute.page),
         AutoRoute(page: TemplateRoute.page),

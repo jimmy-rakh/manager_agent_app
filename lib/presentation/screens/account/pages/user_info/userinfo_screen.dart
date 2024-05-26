@@ -32,8 +32,8 @@ class UserInfoScreen extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(24, 8, 24, 110),
                       physics: const BouncingScrollPhysics(),
                       children: [
-                        const UserImageSection(),
-                        verticalSpace16,
+                        // const UserImageSection(),
+                        // verticalSpace16,
                         if (viewModel.userRequests.isNotEmpty)
                           Container(
                             decoration: BoxDecoration(
@@ -95,19 +95,6 @@ class UserInfoScreen extends StatelessWidget {
                           readOnly: true,
                           textInputFormatter: [phoneMask],
                           fieldController: viewModel.phoneController,
-                        ),
-                        verticalSpace12,
-                        AppTextField(
-                          readOnly: true,
-                          label: 'profile.write_company_name'.tr(),
-                          fieldController: viewModel.companyNameController,
-                        ),
-                        verticalSpace12,
-                        AppTextField(
-                          readOnly: true,
-                          label: 'profile.company_inn'.tr(),
-                          fieldController: viewModel.companyInnController,
-                          textInputType: TextInputType.number,
                         ),
                         verticalSpace12,
                         if (viewModel.user.type ==

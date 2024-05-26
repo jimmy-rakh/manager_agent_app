@@ -24,6 +24,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../data/models/client/client.dart';
+
 class AuthService with ListenableServiceMixin {
   final _authRepository = getIt<AuthRepositoryImpl>();
   final _notficationService = getIt<NotificationService>();
@@ -44,7 +46,7 @@ class AuthService with ListenableServiceMixin {
 
   AuthService() {
     listenToReactiveValues(
-        [_isUserExist, _userData, _isUserBanned, _balance, _userRequests]);
+        [_isUserExist, _userData,  _isUserBanned, _balance, _userRequests]);
   }
 
   void setUserStatus(UserStatus userStatus) {
@@ -107,6 +109,8 @@ class AuthService with ListenableServiceMixin {
       rethrow;
     }
   }
+
+
 
   Future<void> createUser(String phone, String name, String surname,
       String lastName, String code) async {

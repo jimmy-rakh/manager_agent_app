@@ -24,7 +24,7 @@ class SplashScreen extends StatelessWidget {
               Hero(
                 tag: 'logo',
                 child: Text(
-                  'ClientApp',
+                  'Agent manager',
                   style: TextStyle(
                       color: AppColors.primary,
                       fontWeight: FontWeight.w600,

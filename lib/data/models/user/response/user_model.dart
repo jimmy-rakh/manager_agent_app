@@ -9,7 +9,7 @@ class UserModel {
   String? companyName;
   String? companyInn;
   int? notifyCount;
-  String? id;
+  int? id;
   String? typeName;
   String? name;
   String? phoneNumber;

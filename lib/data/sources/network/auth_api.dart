@@ -14,6 +14,8 @@ import 'package:bingo/data/models/user/response/check_user.dart';
 import 'package:bingo/data/models/user/response/user_model.dart';
 import 'package:bingo/data/models/user/response/balance_model.dart';
 
+import '../../models/client/client.dart';
+
 abstract class AuthApi {
   Future<DeviceTokenDto> registerGuestToken(RegisterDeviceTokenRequest request);
 
@@ -24,6 +26,8 @@ abstract class AuthApi {
   Future<DefaultResponse> requestCode(LoginRequest request);
 
   Future<UserModel> getProfileData();
+
+  Future<Client> getClientData(int? inn);
 
   Future<DefaultResponse> logOut();
 
@@ -85,6 +89,17 @@ class AuthApiImpl extends AuthApi {
       final res = await _bingoApi.get(NetworkConstants.users);
 
       return UserModel.fromJson(res);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Client> getClientData(int? inn) async {
+    try {
+      final res = await _bingoApi.get("${NetworkConstants.clients}$inn");
+
+      return Client.fromJson(res);
     } catch (e) {
       rethrow;
     }

@@ -19,7 +19,6 @@ class CategoriesViewModel extends ReactiveViewModel {
   }
 
   getData() async {
-    _searchService.fetchAllCategories();
     _searchService.getLocalCategories();
   }
 }

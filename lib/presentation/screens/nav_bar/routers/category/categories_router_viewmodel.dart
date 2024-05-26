@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:bingo/app/locator.dart';
 import 'package:bingo/app/router.dart';
 import 'package:bingo/core/network/constants.dart';
@@ -50,23 +49,23 @@ class CategoriesRouterViewModel extends ReactiveViewModel {
   late SearchRequest? specificSearchRequest;
 
   onReady() {
-    searchRequest = SearchRequest(
-        url: NetworkConstants.searchProducts,
-        title: searchFieldController.text,
-        brands: [],
-        categoryId: null,
-        subcategoryId: null,
-        priceFrom: null,
-        priceTo: null,
-        orderBy: ['-created_at']);
-    searchScrollController.addListener(() {
-      if (searchScrollController.position.extentAfter < 100 &&
-          !isBusy &&
-          searchRequest.url != null &&
-          isSearched) {
-        search(loadMore: true);
-      }
-    });
+    // searchRequest = SearchRequest(
+    //     url: NetworkConstants.searchProducts,
+    //     title: searchFieldController.text,
+    //     brands: [],
+    //     categoryId: null,
+    //     subcategoryId: null,
+    //     priceFrom: null,
+    //     priceTo: null,
+    //     orderBy: ['-created_at']);
+    // searchScrollController.addListener(() {
+    //   if (searchScrollController.position.extentAfter < 100 &&
+    //       !isBusy &&
+    //       searchRequest.url != null &&
+    //       isSearched) {
+    //     search(loadMore: true);
+    //   }
+    // });
   }
 
   onSearch(String value, {bool onValueSearch = false}) async {

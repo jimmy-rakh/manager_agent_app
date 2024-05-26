@@ -23,7 +23,7 @@ class NetworkConstants {
   static String cart = '${baseApiUrl}cart/';
   static String checkOrder = '${baseApiUrl}order_check/';
   static String storeCategories = '${baseApiUrl}provider_cat';
-  static String subCategories = '${baseApiUrl}categories/category/subcategories/';
+  static String subCategories = '${baseApiUrl}category/subcategories/';
   static String categories = '${baseApiUrl}categories';
   static String login = '${baseApiUrl}manager/login/';
   static String logOut = '${baseApiUrl}manager/login/';

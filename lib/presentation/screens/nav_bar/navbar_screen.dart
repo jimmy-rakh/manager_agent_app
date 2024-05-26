@@ -29,7 +29,8 @@ class NavBarScreen extends StatelessWidget {
               builder: (context, children, tabsRouter) => Scaffold(
                 appBar: AppBar(
                   leading: const BackButton(),
-                  title: const Text('client'),),
+                  centerTitle: false,
+                  title:  Text(viewModel.client?.companyName ?? ""),),
                     resizeToAvoidBottomInset: true,
                     extendBody: true,
                     body: IndexedStack(

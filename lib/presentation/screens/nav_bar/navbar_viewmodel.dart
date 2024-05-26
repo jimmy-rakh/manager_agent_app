@@ -8,6 +8,9 @@ import 'package:bingo/presentation/screens/nav_bar/widgets/bottom_bar.dart';
 import 'package:iconly/iconly.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../data/models/client/client.dart';
+import '../../../domain/services/client_service.dart';
+
 class NavBarViewModel extends ReactiveViewModel {
   final NavBarService _navBarService = getIt();
   final AuthService _authService = getIt();
@@ -24,10 +27,12 @@ class NavBarViewModel extends ReactiveViewModel {
     NavBarItem(icon: IconlyLight.bag_2, activeIcon: IconlyBold.bag_2),
     // NavBarItem(icon: IconlyLight.profile, activeIcon: IconlyBold.profile)
   ];
+  final ClientService _clientService = getIt();
 
+  Client? get client => _clientService.clientData;
   @override
   List<ListenableServiceMixin> get listenableServices =>
-      [_navBarService, _authService, _productsService];
+      [_navBarService, _authService, _productsService,_clientService];
 
   onReady() async {
 

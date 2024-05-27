@@ -9,7 +9,7 @@ class ClientService  with ListenableServiceMixin{
 
   final ReactiveValue<Client?> _clientData = ReactiveValue(null);
   Client? get clientData => _clientData.value;
-
+  int? inn;
   ClientService() {
     listenToReactiveValues(
         [ _clientData,]);
@@ -19,7 +19,7 @@ class ClientService  with ListenableServiceMixin{
     try {
      final  res = await _authRepository.getClientData(inn);
       _clientData.value = res;
-     _clientData.value?.id = res.id;
+     this.inn = inn;
      return res;
     } catch (e) {
       rethrow;

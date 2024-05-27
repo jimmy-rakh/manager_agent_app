@@ -25,11 +25,11 @@ abstract class ProductsApi {
 
   Future<ProductDto> fetchProductById(int id);
 
-  Future<CartDto> getCartProducts();
+  Future<CartDto> getCartProducts(int? inn);
 
-  Future addToCart(AddCartRequest request);
+  Future addToCart(int? inn ,AddCartRequest request);
 
-  Future delFromCart(AddCartRequest request);
+  Future delFromCart(int? inn ,AddCartRequest request);
 
   Future updateCartProduct(AddCartRequest request);
 
@@ -74,9 +74,9 @@ class ProductsApiImpl extends ProductsApi {
   }
 
   @override
-  Future<CartDto> getCartProducts() async {
+  Future<CartDto> getCartProducts(int? inn) async {
     try {
-      final res = await _bingoApi.get(NetworkConstants.cart);
+      final res = await _bingoApi.get("${NetworkConstants.cart}$inn");
       return CartDto.fromJson(res);
     } catch (e) {
       rethrow;
@@ -84,13 +84,33 @@ class ProductsApiImpl extends ProductsApi {
   }
 
   @override
-  Future addToCart(AddCartRequest request) async {
+  Future addToCart(int? inn ,AddCartRequest request) async {
     try {
-      await _bingoApi.post(NetworkConstants.cart, data: request.toJson());
+      await _bingoApi.post("${NetworkConstants.cart}$inn/", data: request.toJson());
     } catch (e) {
       rethrow;
     }
   }
+
+
+  @override
+  Future delFromCart(int? inn ,AddCartRequest request) async {
+    try {
+      await _bingoApi.delete("${NetworkConstants.cart}$inn/", data: request.toJson());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future updateCartProduct(AddCartRequest request) async {
+    try {
+      await _bingoApi.patch(NetworkConstants.cart, data: request.toJson());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
 
   @override
   Future addToFav(AddCartRequest request) async {
@@ -107,24 +127,6 @@ class ProductsApiImpl extends ProductsApi {
     try {
       await _bingoApi.delete(NetworkConstants.addFavorite,
           data: request.toJson());
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future delFromCart(AddCartRequest request) async {
-    try {
-      await _bingoApi.delete(NetworkConstants.cart, data: request.toJson());
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future updateCartProduct(AddCartRequest request) async {
-    try {
-      await _bingoApi.patch(NetworkConstants.cart, data: request.toJson());
     } catch (e) {
       rethrow;
     }

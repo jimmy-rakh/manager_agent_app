@@ -20,16 +20,19 @@ import 'package:bingo/domain/services/navigation_service/navigation_service.dart
 import 'package:bingo/domain/services/products_service/products_service.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../domain/services/client_service.dart';
+
 class ProductViewModel extends ReactiveViewModel {
   final ProductsService _productsService = getIt();
   final NavBarService _navBarService = getIt();
   final TemplateService _templateService = getIt();
-
+  final ClientService _clientService = getIt();
   @override
-  List<ListenableServiceMixin> get listenableServices => [_productsService];
+  List<ListenableServiceMixin> get listenableServices => [_productsService,_clientService];
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   CartDto? get cartData => _productsService.cartData;
+  int? get inn => _clientService.inn;
   Stream? get stream => _productsService.stream;
   StreamController? get streamController => _productsService.controller;
   ProductDto? product ;
@@ -105,10 +108,10 @@ class ProductViewModel extends ReactiveViewModel {
       }
       notifyListeners();
       if (similarProduct?.inCart ?? false) {
-        await _productsService.delFromCart([similarProduct!.id!]);
+        await _productsService.delFromCart(inn,[similarProduct!.id!]);
       } else {
 
-        await _productsService.addToCart(
+        await _productsService.addToCart(inn,
             similarProduct?.id ?? product!.id!,
             int.parse(similarProduct?.id != null
                 ? '1'

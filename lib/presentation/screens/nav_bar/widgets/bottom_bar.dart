@@ -54,7 +54,7 @@ class BottomBar extends ViewModelWidget<NavBarViewModel> {
                                   ? AppColors.primary
                                   : AppColors.grey,
                             ),
-                            itemCount: index == 2 &&
+                            itemCount: index == 1 &&
                                     (viewModel.cartData?.cartproducts
                                             ?.isNotEmpty ??
                                         false)

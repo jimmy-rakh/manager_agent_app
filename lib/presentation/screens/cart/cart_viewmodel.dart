@@ -9,16 +9,18 @@ import 'package:bingo/domain/services/products_service/products_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:stacked/stacked.dart';
+import '../../../domain/services/client_service.dart';
 
 class CartViewModel extends ReactiveViewModel {
   final ProductsService _productsService = getIt();
   final AuthService _authService = getIt();
+  final ClientService _clientService = getIt();
 
   @override
-  List<ListenableServiceMixin> get listenableServices => [_productsService];
+  List<ListenableServiceMixin> get listenableServices => [_productsService,_clientService];
 
   CartDto? get cartData => _productsService.cartData;
-
+  int? get inn => _clientService.inn;
   List<TextEditingController> get productsQuantity =>
       _productsService.productsQuantity;
 
@@ -36,7 +38,7 @@ class CartViewModel extends ReactiveViewModel {
 
   getData() async {
     try {
-      await _productsService.getCartProduct();
+      await _productsService.getCartProduct(inn);
       for (var i = 0; i < cartData!.cartproducts!.length; i++) {
         quantityFocus.add(FocusNode());
       }
@@ -128,7 +130,7 @@ class CartViewModel extends ReactiveViewModel {
         notifyListeners();
       }
 
-      await _productsService.delFromCart(
+      await _productsService.delFromCart(inn,
           product != null ? [product.id!] : selectedCartProductsId);
 
       if (product != null) {

@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:collection/collection.dart';
 import '../../../data/models/pagination/request.dart';
+import '../client_service.dart';
 
 class ProductsService with ListenableServiceMixin {
   final ProductsRepository _productsRepository =
@@ -26,10 +27,9 @@ class ProductsService with ListenableServiceMixin {
       _postersList,
       _productsQuantity,
       _quantityFocus,
-      _favorites
+      _favorites,
     ]);
   }
-
 
   final ReactiveValue<ProductsPagination?> _popularProducts =
       ReactiveValue(null);
@@ -136,9 +136,9 @@ class ProductsService with ListenableServiceMixin {
     }
   }
 
-  Future<void> getCartProduct() async {
+  Future<void> getCartProduct(int? inn) async {
     try {
-      final res = await _productsRepository.getCartProducts();
+      final res = await _productsRepository.getCartProducts(inn);
       // if (stream != null) {
       //   controller.add(1);
       // }
@@ -158,11 +158,11 @@ class ProductsService with ListenableServiceMixin {
     }
   }
 
-  Future<void> addToCart(int productId, int quantity) async {
+  Future<void> addToCart(int? inn,int productId, int quantity) async {
     AddCartRequest request =
         AddCartRequest(productId: productId, quantity: quantity);
     try {
-      await _productsRepository.addToCart(request);
+      await _productsRepository.addToCart(inn,request);
 
       if (popularProducts != null) {
         popularProducts!.results!
@@ -187,41 +187,17 @@ class ProductsService with ListenableServiceMixin {
         product!.inCart = true;
       }
 
-      await getCartProduct();
+      await getCartProduct(inn);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<void> addToFav(int productId) async {
-    AddCartRequest request = AddCartRequest(productId: productId);
-    try {
-      await _productsRepository.addToFav(request);
-      // if (productsOfDay != null) {
-      //   productsOfDay!.results!
-      //       .firstWhereOrNull((element) => element.id == productId)
-      //       ?.infav = true;
-      // }
-      fetchFavorites();
-    } catch (e) {
-      rethrow;
-    }
-  }
 
-  Future<void> delFromFav(int productId) async {
-    AddCartRequest request = AddCartRequest(productId: productId);
-    try {
-      await _productsRepository.delFromFav(request);
-      fetchFavorites();
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> delFromCart(List<int> ids) async {
+  Future<void> delFromCart(int? inn,List<int> ids) async {
     try {
       AddCartRequest request = AddCartRequest(cartProductsIds: ids);
-      await _productsRepository.delFromCart(request);
+      await _productsRepository.delFromCart(inn,request);
       for (var id in ids) {
         if (popularProducts != null) {
           popularProducts!.results!
@@ -253,7 +229,7 @@ class ProductsService with ListenableServiceMixin {
       }
 
 
-      await getCartProduct();
+      await getCartProduct(inn);
     } catch (e) {
       rethrow;
     }
@@ -263,6 +239,31 @@ class ProductsService with ListenableServiceMixin {
     AddCartRequest request = AddCartRequest(productId: id, quantity: quantity);
     try {
       await _productsRepository.updateCartProduct(request);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> addToFav(int productId) async {
+    AddCartRequest request = AddCartRequest(productId: productId);
+    try {
+      await _productsRepository.addToFav(request);
+      // if (productsOfDay != null) {
+      //   productsOfDay!.results!
+      //       .firstWhereOrNull((element) => element.id == productId)
+      //       ?.infav = true;
+      // }
+      fetchFavorites();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> delFromFav(int productId) async {
+    AddCartRequest request = AddCartRequest(productId: productId);
+    try {
+      await _productsRepository.delFromFav(request);
+      fetchFavorites();
     } catch (e) {
       rethrow;
     }

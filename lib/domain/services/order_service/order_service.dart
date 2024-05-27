@@ -123,9 +123,9 @@ class OrderService with ListenableServiceMixin {
     _selectedTime.value = null;
   }
 
-  Future<void> fetchOrders({String? url}) async {
+  Future<void> fetchOrders(int? inn,{String? url}) async {
     try {
-      final res = await _orderRepository.fetchOrders(url: url);
+      final res = await _orderRepository.fetchOrders(inn,url: url);
       if (url == null) {
         _userOrders.value = res;
       } else {
@@ -137,20 +137,20 @@ class OrderService with ListenableServiceMixin {
     }
   }
 
-  Future<void> fetchUnpaidOrders({String? url}) async {
-    try {
-      final res =
-          await _orderRepository.fetchOrders(url: url, status: 'WAITPAY');
-      if (url == null) {
-        _unpaidOrders.value = res;
-      } else {
-        unpaidOrders!.results!.addAll(res.results!);
-        unpaidOrders!.next = res.next;
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
+  // Future<void> fetchUnpaidOrders({String? url}) async {
+  //   try {
+  //     final res =
+  //         await _orderRepository.fetchOrders(url: url, status: 'WAITPAY');
+  //     if (url == null) {
+  //       _unpaidOrders.value = res;
+  //     } else {
+  //       unpaidOrders!.results!.addAll(res.results!);
+  //       unpaidOrders!.next = res.next;
+  //     }
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
 
   // Future<void> fetchActiveOrders({String? url}) async {
   //   try {

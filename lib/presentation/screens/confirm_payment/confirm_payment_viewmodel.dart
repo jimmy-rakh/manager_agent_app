@@ -77,7 +77,7 @@ class ConfirmPaymentViewModel extends ReactiveViewModel {
           cardId: selectedCard?.id,
           byCash: withCash,
           byTransfer: withBalance);
-      _orderService.fetchOrders();
+      // _orderService.fetchOrders();
       Navigator.pop(router.navigatorKey.currentContext!, true);
     } catch (e) {
       print(e);

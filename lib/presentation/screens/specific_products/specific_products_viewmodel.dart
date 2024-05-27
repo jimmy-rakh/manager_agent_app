@@ -6,12 +6,15 @@ import 'package:bingo/data/models/products/response/product_model.dart';
 import 'package:bingo/domain/services/products_service/products_service.dart';
 import 'package:stacked/stacked.dart';
 import '../../../data/models/products/response/cart_model.dart';
+import '../../../domain/services/client_service.dart';
 
 class SpecificProductsViewModel extends ReactiveViewModel {
   final ProductsService _productsService = getIt();
+  final ClientService _clientService = getIt();
   CartDto? get cartData => _productsService.cartData;
+  int? get inn => _clientService.inn;
   @override
-  List<ListenableServiceMixin> get listenableServices => [_productsService];
+  List<ListenableServiceMixin> get listenableServices => [_productsService,_clientService];
 
   ProductsPagination? get products => _productsService.specificProducts;
   List<TextEditingController> quantityController = [];
@@ -64,7 +67,7 @@ class SpecificProductsViewModel extends ReactiveViewModel {
     try {
       product.isBusy = true;
       notifyListeners();
-      await _productsService.addToCart(
+      await _productsService.addToCart(inn,
           product.id!,
           quantityController[index ?? 0].text == ''
               ? 1
@@ -82,7 +85,7 @@ class SpecificProductsViewModel extends ReactiveViewModel {
       product.isBusy = true;
       notifyListeners();
 
-      await _productsService.delFromCart([product.id!]);
+      await _productsService.delFromCart(inn,[product.id!]);
       product.inCart = false;
     } catch (e) {
       print(e);

@@ -38,7 +38,7 @@ class OrderDetailsViewModel extends ReactiveViewModel {
       // NavigationService.showErrorToast(e.toString());
     }
     setBusy(false);
-    await _orderService.fetchOrders();
+    // await _orderService.fetchOrders();
     isReviewed();
   }
 

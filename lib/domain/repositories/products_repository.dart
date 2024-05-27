@@ -17,9 +17,9 @@ abstract class ProductsRepository {
   Future<ProductsPagination> fetchPopular(PaginationRequest request, {String? url});
   Future<ProductsPagination> fetchByPagination(String url);
   Future<ProductDto> fetchProductById(int id);
-  Future<CartDto> getCartProducts();
-  Future addToCart(AddCartRequest request);
-  Future delFromCart(AddCartRequest request);
+  Future<CartDto> getCartProducts(int? inn);
+  Future addToCart(int? inn,AddCartRequest request);
+  Future delFromCart(int? inn,AddCartRequest request);
   Future addToFav(AddCartRequest request);
   Future delFromFav(AddCartRequest request);
   Future updateCartProduct(AddCartRequest request);
@@ -51,23 +51,41 @@ class ProductsRepositoryImpl extends ProductsRepository {
   }
 
   @override
-  Future<CartDto> getCartProducts() async {
+  Future<CartDto> getCartProducts(int? inn) async {
     try {
-      return await _api.getCartProducts();
+      return await _api.getCartProducts(inn);
     } catch (e) {
       rethrow;
     }
   }
 
   @override
-  Future addToCart(AddCartRequest request) async {
+  Future addToCart(int? inn,AddCartRequest request) async {
     try {
-      await _api.addToCart(request);
+      await _api.addToCart(inn,request);
     } catch (e) {
       rethrow;
     }
   }
 
+
+  @override
+  Future delFromCart(int? inn,AddCartRequest request) async {
+    try {
+      await _api.delFromCart(inn,request);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future updateCartProduct(AddCartRequest request) async {
+    try {
+      await _api.updateCartProduct(request);
+    } catch (e) {
+      rethrow;
+    }
+  }
   @override
   Future addToFav(AddCartRequest request) async {
     try {
@@ -81,24 +99,6 @@ class ProductsRepositoryImpl extends ProductsRepository {
   Future delFromFav(AddCartRequest request) async {
     try {
       await _api.delFromFav(request);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future delFromCart(AddCartRequest request) async {
-    try {
-      await _api.delFromCart(request);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future updateCartProduct(AddCartRequest request) async {
-    try {
-      await _api.updateCartProduct(request);
     } catch (e) {
       rethrow;
     }

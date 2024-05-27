@@ -16,18 +16,21 @@ import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../../../data/models/products/response/cart_model.dart';
+import '../../../../../domain/services/client_service.dart';
 
 class CategoriesRouterViewModel extends ReactiveViewModel {
   final NavBarService _navBarService = getIt();
   final SearchService _searchService = getIt();
   final ProductsService _productsService = getIt();
+  final ClientService _clientService = getIt();
   CartDto? get cartData => _productsService.cartData;
+  int? get inn => _clientService.inn;
   final TextEditingController searchFieldController = TextEditingController();
   List<TextEditingController> quantityController = [];
   List<FocusNode> quantityFocus = [];
   @override
   List<ListenableServiceMixin> get listenableServices =>
-      [_navBarService, _searchService, _productsService];
+      [_navBarService, _searchService, _productsService,_clientService];
 
   bool get isSearching => _navBarService.secondScreenSearchStatus;
   SearchResponse? get secondSearchVal => _searchService.secondSearchValue;
@@ -100,7 +103,7 @@ class CategoriesRouterViewModel extends ReactiveViewModel {
     try {
       product.isBusy = true;
       notifyListeners();
-      await _productsService.addToCart(
+      await _productsService.addToCart(inn,
           product.id!,
           quantityController[index ?? 0].text == ''
               ? 1
@@ -118,7 +121,7 @@ class CategoriesRouterViewModel extends ReactiveViewModel {
       product.inCart = false;
       notifyListeners();
 
-      await _productsService.delFromCart([product.id!]);
+      await _productsService.delFromCart(inn,[product.id!]);
     } catch (e) {
       print(e);
     }

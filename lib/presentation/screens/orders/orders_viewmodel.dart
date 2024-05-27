@@ -9,13 +9,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../domain/services/client_service.dart';
+
 class OrdersScreenModel extends ReactiveViewModel {
   final AuthService _authService = getIt();
   final OrderService _orderService = getIt();
+  final ClientService _clientService = getIt();
 
   @override
   List<ListenableServiceMixin> get listenableServices =>
-      [_authService, _orderService];
+      [_authService, _orderService,_clientService];
+
+  int? get inn => _clientService.inn;
 
   late TabController tabController;
   late PageController pageController;
@@ -57,7 +62,7 @@ class OrdersScreenModel extends ReactiveViewModel {
 
   fetchOrders() async {
     try {
-      await _orderService.fetchOrders();
+      await _orderService.fetchOrders(inn);
 
     } catch (e) {
       NavigationService.showErrorToast(e.toString());
@@ -73,10 +78,10 @@ class OrdersScreenModel extends ReactiveViewModel {
     try {
       switch (tabController.index) {
         case 0:
-          await _orderService.fetchOrders(url: userOrders?.next);
+          await _orderService.fetchOrders(inn,url: userOrders?.next);
           break;
         default:
-          await _orderService.fetchOrders(url: userOrders?.next);
+          await _orderService.fetchOrders(inn,url: userOrders?.next);
       }
     } catch (e) {
       NavigationService.showErrorToast(e.toString());

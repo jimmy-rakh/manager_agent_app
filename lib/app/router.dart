@@ -13,7 +13,6 @@ import 'package:bingo/presentation/screens/cart/cart_screen.dart';
 import 'package:bingo/presentation/screens/categories/categories_screen.dart';
 import 'package:bingo/presentation/screens/checkout/checkout_screen.dart';
 import 'package:bingo/presentation/screens/confirm_payment/confirm_payment_screen.dart';
-import 'package:bingo/presentation/screens/home/home_screen.dart';
 import 'package:bingo/presentation/screens/login/login_screen.dart';
 import 'package:bingo/presentation/screens/nav_bar/navbar_screen.dart';
 import 'package:bingo/presentation/screens/nav_bar/routers/account/account_router.dart';
@@ -52,10 +51,7 @@ class AppRouter extends _$AppRouter {
             transitionsBuilder: TransitionsBuilders.noTransition),
         AutoRoute(page: ClientByInnRoute.page),
         AutoRoute(page: NavBarRoute.page, children: [
-          AutoRoute(page: HomeRouterRoute.page, children: [
-            AutoRoute(path: '', page: HomeRoute.page),
-            AutoRoute(page: HomeProductRoute.page)
-          ]),
+
           AutoRoute(page: CategoriesRouterRoute.page, children: [
             AutoRoute(path: '', page: CategoriesRoute.page),
             AutoRoute(page: CategoryProductRoute.page),

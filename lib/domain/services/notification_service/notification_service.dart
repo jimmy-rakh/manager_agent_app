@@ -71,7 +71,7 @@ class NotificationService {
     print(await _firebaseMessaging.getToken());
 
     // Init firebase notification listeners
-    FirebaseMessaging.onMessage.listen(_handleMessage);
+    // FirebaseMessaging.onMessage.listen(_handleMessage);
     FirebaseMessaging.onMessageOpenedApp.listen(_onMessageOpenedApp);
     _firebaseMessaging.getInitialMessage().then((RemoteMessage? remoteMessage) {
       if (remoteMessage != null) {
@@ -136,33 +136,33 @@ class NotificationService {
     }
   }
 
-  void _handleMessage(RemoteMessage message) async {
-    print(message);
-    print(message.data);
+  // void _handleMessage(RemoteMessage message) async {
+  //   print(message);
+  //   print(message.data);
+  //
+  //   switch (message.data['status']) {
+  //     case 'NEW':
+  //       handleNewOrder();
+  //       break;
+  //     case 'WAITPAY':
+  //       _fetchUnpaidOrders();
+  //       break;
+  //     default:
+  //   }
+  //
+  //   if (Platform.isAndroid) {
+  //     _showNotification(message);
+  //   }
+  // }
 
-    switch (message.data['status']) {
-      case 'NEW':
-        handleNewOrder();
-        break;
-      case 'WAITPAY':
-        _fetchUnpaidOrders();
-        break;
-      default:
-    }
 
-    if (Platform.isAndroid) {
-      _showNotification(message);
-    }
-  }
-
-
-  Future<void> _fetchUnpaidOrders() async {
-    try {
-      _orderService.fetchUnpaidOrders();
-    } catch (e) {
-      print(e);
-    }
-  }
+  // Future<void> _fetchUnpaidOrders() async {
+  //   try {
+  //     _orderService.fetchUnpaidOrders();
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   void handleNewOrder() {
     print('\n\n New Order \n\n');

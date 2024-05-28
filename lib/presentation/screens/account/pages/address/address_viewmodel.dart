@@ -17,7 +17,7 @@ class AddressScreenViewModel extends ReactiveViewModel {
   getData() async {
     setBusy(true);
     try {
-      await _addressService.fetchAddresses();
+      // await _addressService.fetchAddresses();
     } catch (e) {
       NavigationService.showErrorToast(e.toString());
     }

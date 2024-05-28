@@ -4,7 +4,7 @@ import 'package:bingo/data/models/address/address_response.dart';
 import 'package:bingo/data/sources/network/address_api.dart';
 
 abstract class AddressRepository {
-  Future<List<AddressModel>> fetchAddress();
+  Future<List<AddressModel>> fetchAddress(int? inn);
 
   Future<void> addAddress(AddAddressRequestModel request);
 
@@ -37,9 +37,9 @@ class AddressRepositoryImpl implements AddressRepository {
   }
 
   @override
-  Future<List<AddressModel>> fetchAddress() async {
+  Future<List<AddressModel>> fetchAddress(int? inn) async {
     try {
-      final response = await _addressApi.fetchAddress();
+      final response = await _addressApi.fetchAddress(inn);
       return response;
     } catch (e) {
       rethrow;

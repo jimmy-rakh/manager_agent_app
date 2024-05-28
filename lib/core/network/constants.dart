@@ -1,6 +1,6 @@
 class NetworkConstants {
   static String okansBaseUrl = 'https://test-api.okans.uz';
-  static String baseApiUrl = 'https://test-api.okans.uz/v1/rmanagers/';
+  static String baseApiUrl = 'https://texnostore.uz/v1/rmanagers/';
   static Duration connectTimeout = const Duration(seconds: 10000);
   static Duration receiveTimeout = const Duration(seconds: 10000);
 
@@ -26,7 +26,7 @@ class NetworkConstants {
   static String subCategories = '${baseApiUrl}category/subcategories/';
   static String categories = '${baseApiUrl}categories';
   static String login = '${baseApiUrl}manager/login/';
-  static String logOut = '${baseApiUrl}manager/login/';
+  static String logOut = '${baseApiUrl}manager/';
   static String addFavorite = '${baseApiUrl}favourites/';
   static String deleteFavorite = '${baseApiUrl}del_favourite/';
   static String fetchOrders = '${baseApiUrl}orders/';
@@ -44,7 +44,7 @@ class NetworkConstants {
   static String fetchGuestToken = '${users}devices/';
   static String requestCode = '${users}send/code/';
   static String card = '${baseApiUrl}cards/';
-  static String address = '${baseApiUrl}address/';
+  static String address = '${baseApiUrl}';
   static String uploadImage = '${users}upload-image/';
   static String recomendedProducts = '${products}recomended/';
   static String hitProducts = '${products}hit/';

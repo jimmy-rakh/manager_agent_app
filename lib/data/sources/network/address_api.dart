@@ -7,7 +7,7 @@ import 'package:bingo/data/models/address/add_address_request.dart';
 import 'package:bingo/data/models/address/address_response.dart';
 
 abstract class AddressApi {
-  Future<List<AddressModel>> fetchAddress();
+  Future<List<AddressModel>> fetchAddress(int? inn);
 
   Future<void> addAddress(AddAddressRequestModel request);
 
@@ -20,9 +20,9 @@ class AddressApiImpl implements AddressApi {
   final BingoApi _bingoApi = getIt();
 
   @override
-  Future<List<AddressModel>> fetchAddress() async {
+  Future<List<AddressModel>> fetchAddress(int? inn) async {
     try {
-      final res = await _bingoApi.get(NetworkConstants.address);
+      final res = await _bingoApi.get("${NetworkConstants.address}clients/$inn/address");
       final myList =
           List.from(res['delivery_addresses']).map((e) => AddressModel.fromJson(e)).toList();
       return myList;

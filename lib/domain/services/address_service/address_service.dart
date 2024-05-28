@@ -15,9 +15,9 @@ class AddressService with ListenableServiceMixin {
   Future<void> searchAddress(
       {double? lat, double? lon, String? address, String? query}) async {}
 
-  Future<List<AddressModel>> fetchAddresses() async {
+  Future<List<AddressModel>> fetchAddresses(int? inn) async {
     try {
-      return await _addressRepository.fetchAddress();
+      return await _addressRepository.fetchAddress(inn);
     } catch (e) {
       rethrow;
     }

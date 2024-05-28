@@ -18,9 +18,9 @@ class CheckoutWidget extends ViewModelWidget<CartViewModel> {
     return viewModel.cartData == null
         ? const SizedBox()
         : Container(
-            height: 78,
+            height: 100,
             width: ScreenSize.width,
-            margin: const EdgeInsets.only(bottom: 55,),
+            margin: const EdgeInsets.only(bottom: 60,),
             decoration: BoxDecoration(
                 color: Theme.of(context).cardColor,
                 boxShadow: [
@@ -31,7 +31,7 @@ class CheckoutWidget extends ViewModelWidget<CartViewModel> {
                   )
                 ],
                 borderRadius:
-                     BorderRadius.circular(16)),
+                     const BorderRadius.only(topLeft: Radius.circular(12),topRight: Radius.circular(12))),
             padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,

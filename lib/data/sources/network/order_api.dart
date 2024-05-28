@@ -12,7 +12,7 @@ import 'package:bingo/data/models/orders/response/order_details_dto.dart';
 import 'package:bingo/data/models/orders/response/order_list_dto.dart';
 
 abstract class OrderApi {
-  Future<OrderDetailsDto> createOrder(CreateOrderDto request);
+  Future<OrderDetailsDto> createOrder(int? inn,CreateOrderDto request);
   Future<UserOrdersDto> fetchOrders(int? inn, {String? url, String? status});
   Future<OrderDetailsDto> fetchOrderById(String orderId);
 }
@@ -21,10 +21,10 @@ class OrderApiImpl extends OrderApi {
   final BingoApi _bingoApi = getIt();
 
   @override
-  Future<OrderDetailsDto> createOrder(CreateOrderDto request) async {
+  Future<OrderDetailsDto> createOrder(int? inn,CreateOrderDto request) async {
     try {
       final res =
-          await _bingoApi.post(NetworkConstants.orders, data: request.toJson());
+          await _bingoApi.post("${NetworkConstants.orders}$inn/", data: request.toJson());
       return OrderDetailsDto.fromJson(res);
     } catch (e) {
       rethrow;

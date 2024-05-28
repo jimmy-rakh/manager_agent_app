@@ -65,14 +65,14 @@ class OrderService with ListenableServiceMixin {
   UserOrdersDto? get activeOrders => _activeOrders.value;
   OrderDetailsDto? get lastCreatedOrder => _lastCreatedOrder.value;
 
-  createOrder() async {
+  createOrder(int? inn,) async {
     CreateOrderDto request = CreateOrderDto(
       addressId: selectedAddress?.id,
       time: selectedTime,
       pickupPointId: selectedPoint?.id,
     );
     try {
-      final res = await _orderRepository.createOrder(request);
+      final res = await _orderRepository.createOrder(inn,request);
       _lastCreatedOrder.value = res;
       if (res.id != null) {
         NavigationService.showCustomDialog(dialog: const SuccessOrderView());

@@ -10,7 +10,7 @@ import 'package:bingo/data/sources/local/storage.dart';
 import 'package:bingo/data/sources/network/order_api.dart';
 
 abstract class OrderRepository {
-  Future<OrderDetailsDto> createOrder(CreateOrderDto request);
+  Future<OrderDetailsDto> createOrder(int? inn,CreateOrderDto request);
   Future<UserOrdersDto> fetchOrders(int? inn,{String? url, String? status});
   Future<OrderDetailsDto> fetchOrderById(String orderId);
 }
@@ -20,9 +20,9 @@ class OrderRepositoryImpl implements OrderRepository {
   final LocalStorage _localStorage = getIt<LocalStorageImpl>();
 
   @override
-  Future<OrderDetailsDto> createOrder(request) async {
+  Future<OrderDetailsDto> createOrder(int? inn,request) async {
     try {
-      return await _api.createOrder(request);
+      return await _api.createOrder(inn,request);
     } catch (e) {
       rethrow;
     }

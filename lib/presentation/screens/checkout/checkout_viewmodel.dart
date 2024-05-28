@@ -12,15 +12,18 @@ import 'package:bingo/presentation/bottom_sheets/address_sheet/address_sheet_vie
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../domain/services/client_service.dart';
+
 class CheckoutViewModel extends ReactiveViewModel {
   final ProductsService _productsService = getIt();
   final OrderService _orderService = getIt();
   final TemplateService _templateService = getIt();
+  final ClientService _clientService = getIt();
 
   @override
   List<ListenableServiceMixin> get listenableServices =>
-      [_productsService, _orderService];
-
+      [_productsService, _orderService,_clientService];
+  int? get inn => _clientService.inn;
   CartDto? get cartData => _productsService.cartData;
   AddressModel? get selectedAddress => _orderService.selectedAddress;
   AddressModel? get selectedPoint => _orderService.selectedPoint;
@@ -63,7 +66,7 @@ class CheckoutViewModel extends ReactiveViewModel {
     setBusy(true);
     try {
       template == null
-          ? await _orderService.createOrder()
+          ? await _orderService.createOrder(inn)
           : await _orderService.createTemplateOrder(template!.id!);
     } catch (e) {
       print(e);

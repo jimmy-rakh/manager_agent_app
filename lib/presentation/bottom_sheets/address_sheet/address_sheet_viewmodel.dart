@@ -41,11 +41,6 @@ class AddressSheetViewModel extends ReactiveViewModel {
 
   onChooseAddress({AddressModel? address}) async {
     _orderService.onChooseAddress(address: address);
-    if (address == null) {
-      Navigator.pop(
-        router.navigatorKey.currentContext!,
-      );
-      return;
-    }
+
   }
 }

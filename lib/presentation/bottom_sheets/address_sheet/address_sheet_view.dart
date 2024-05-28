@@ -30,6 +30,7 @@ class AddressSheetView extends StatelessWidget {
                           description: address.phoneNumbers!.join(', '),
                           onTap: () {
                               viewModel.onChooseAddress(address: address);
+                              Navigator.pop(context);
                               },
                           isSelected: viewModel.selectedAddress?.id == address.id,
                           backgroundColor:

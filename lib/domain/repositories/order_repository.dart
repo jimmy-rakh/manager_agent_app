@@ -13,14 +13,6 @@ abstract class OrderRepository {
   Future<OrderDetailsDto> createOrder(CreateOrderDto request);
   Future<UserOrdersDto> fetchOrders(int? inn,{String? url, String? status});
   Future<OrderDetailsDto> fetchOrderById(String orderId);
-  Future<void> submitOrderById(String orderId);
-  Future<void> cancelOrderById(String orderId);
-  Future addReview(AddReviewRequest request);
-  Future fetchDeliveryCost(int addressId);
-  Future<void> paySubmit(PaySubmitModel data);
-  Future<void> confirmOrder(ConfirmOrderRequest request);
-  void addWaitpayOrder(List<int> orderIds);
-  List<int> getWaitpayOrders();
 }
 
 class OrderRepositoryImpl implements OrderRepository {
@@ -54,67 +46,5 @@ class OrderRepositoryImpl implements OrderRepository {
     }
   }
 
-  @override
-  Future<void> submitOrderById(String orderId) async {
-    try {
-       await _api.submitOrderById(orderId);
-    } catch (e) {
-      rethrow;
-    }
-  }
 
-  @override
-  Future<void> cancelOrderById(String orderId) async {
-    try {
-       await _api.cancelOrderById(orderId);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future addReview(AddReviewRequest request) async {
-    try {
-      return await _api.addReview(request);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<DeliveryCostDto> fetchDeliveryCost(int addressId) async {
-    try {
-      return await _api.fetchDeliveryCost(addressId);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<void> paySubmit(PaySubmitModel data) async {
-    try {
-      await _api.paySubmit(data);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<void> confirmOrder(ConfirmOrderRequest request) async {
-    try {
-      await _api.confirmOrder(request);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  void addWaitpayOrder(List<int> orderIds) {
-    _localStorage.addWaitpayOrder(orderIds);
-  }
-
-  @override
-  List<int> getWaitpayOrders() {
-    return _localStorage.getWaitpayOrders();
-  }
 }

@@ -84,22 +84,6 @@ class OrderService with ListenableServiceMixin {
     }
   }
 
-  onChooseCard({GetCardResponse? card, bool? wallet}) {
-    if (card != null) {
-      _selectedCard.value = card;
-      _payByWallet.value = false;
-      _payByCash.value = false;
-    } else if (wallet != null) {
-      _selectedCard.value = null;
-      _payByWallet.value = true;
-      _payByCash.value = false;
-    } else {
-      _payByCash.value = true;
-      _payByWallet.value = false;
-      _selectedCard.value = null;
-    }
-  }
-
   onChooseAddress({AddressModel? address}) {
     _selectedAddress.value = address;
     _pickUp.value = false;
@@ -137,50 +121,6 @@ class OrderService with ListenableServiceMixin {
     }
   }
 
-  // Future<void> fetchUnpaidOrders({String? url}) async {
-  //   try {
-  //     final res =
-  //         await _orderRepository.fetchOrders(url: url, status: 'WAITPAY');
-  //     if (url == null) {
-  //       _unpaidOrders.value = res;
-  //     } else {
-  //       unpaidOrders!.results!.addAll(res.results!);
-  //       unpaidOrders!.next = res.next;
-  //     }
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
-
-  // Future<void> fetchActiveOrders({String? url}) async {
-  //   try {
-  //     final res =
-  //         await _orderRepository.fetchOrders(url: url, status: 'ACTIVE');
-  //     if (url == null) {
-  //       _activeOrders.value = res;
-  //     } else {
-  //       activeOrders!.results!.addAll(res.results!);
-  //       activeOrders!.next = res.next;
-  //     }
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
-  //
-  // Future<void> fetchCompletedOrders({String? url}) async {
-  //   try {
-  //     final res =
-  //         await _orderRepository.fetchOrders(url: url, status: 'COMPLETED');
-  //     if (url == null) {
-  //       _completedOrders.value = res;
-  //     } else {
-  //       completedOrders!.results!.addAll(res.results!);
-  //       completedOrders!.next = res.next;
-  //     }
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
 
   Future<OrderDetailsDto> getOrder(int orderId) async {
     try {
@@ -190,84 +130,6 @@ class OrderService with ListenableServiceMixin {
     }
   }
 
-  Future<void> submitOrderById(int orderId) async {
-    try {
-      await _orderRepository.submitOrderById(orderId.toString());
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> cancelOrderById(int orderId) async {
-    try {
-      await _orderRepository.cancelOrderById(orderId.toString());
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> addReview(
-      {required int productId,
-      required String comment,
-      required int rating}) async {
-    final AddReviewRequest request = AddReviewRequest(
-        productId: productId, comment: comment, rating: rating);
-    try {
-      await _orderRepository.addReview(request);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<DeliveryCostDto> fetchDeliveryCost(int addressId) async {
-    try {
-      return await _orderRepository.fetchDeliveryCost(addressId);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> paySubmit(
-      {required int orderId,
-      String? cardId,
-      bool? byCash,
-      bool? byTransfer}) async {
-    final data = PaySubmitModel(
-        orderId: orderId,
-        cardId: cardId,
-        byCash: byCash,
-        byTransfer: byTransfer);
-    try {
-      await _orderRepository.paySubmit(data);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  confirmOrder(int orderId, String data) async {
-    var key = utf8.encode('order_id=$orderId');
-
-    final hexString = data.replaceAll("-", "");
-    final bytePairs = hexString.split('');
-
-    String result = "";
-    for (var i = 0; i < bytePairs.length; i += 2) {
-      final bytePair = bytePairs.sublist(i, i + 2);
-      final byteValue = int.parse(bytePair.join(), radix: 16);
-      result += byteValue.toRadixString(16).padLeft(2, '0');
-    }
-    var bytes = utf8.encode('hash=$result');
-    var hmacSha256 = Hmac(sha256, key);
-    var digest = hmacSha256.convert(bytes);
-    ConfirmOrderRequest request =
-        ConfirmOrderRequest(sign: '$digest', orderId: orderId);
-
-    try {
-      await _orderRepository.confirmOrder(request);
-    } catch (e) {
-      rethrow;
-    }
-  }
 
   Future<void> createTemplateOrder(String templateId) async {
     try {

@@ -100,22 +100,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ClientByInnScreen(),
       );
     },
-    ConfirmPaymentRoute.name: (routeData) {
-      final args = routeData.argsAs<ConfirmPaymentRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: ConfirmPaymentScreen(
-          key: args.key,
-          orderId: args.orderId,
-        ),
-      );
-    },
-    FavoritesRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const FavoritesScreen(),
-      );
-    },
     HomeProductRoute.name: (routeData) {
       final args = routeData.argsAs<HomeProductRouteArgs>(
           orElse: () => const HomeProductRouteArgs());
@@ -127,12 +111,6 @@ abstract class _$AppRouter extends RootStackRouter {
           incomingProduct: args.incomingProduct,
           incomingProductId: args.incomingProductId,
         ),
-      );
-    },
-    HomeRouterRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HomeRouterScreen(),
       );
     },
     LoginRoute.name: (routeData) {
@@ -207,16 +185,6 @@ abstract class _$AppRouter extends RootStackRouter {
           incomingProduct: args.incomingProduct,
           isFromSearch: args.isFromSearch,
           incomingProductId: args.incomingProductId,
-        ),
-      );
-    },
-    ScannerRoute.name: (routeData) {
-      final args = routeData.argsAs<ScannerRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: ScannerScreen(
-          key: args.key,
-          order: args.order,
         ),
       );
     },
@@ -515,58 +483,6 @@ class ClientByInnRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ConfirmPaymentScreen]
-class ConfirmPaymentRoute extends PageRouteInfo<ConfirmPaymentRouteArgs> {
-  ConfirmPaymentRoute({
-    Key? key,
-    required int orderId,
-    List<PageRouteInfo>? children,
-  }) : super(
-          ConfirmPaymentRoute.name,
-          args: ConfirmPaymentRouteArgs(
-            key: key,
-            orderId: orderId,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'ConfirmPaymentRoute';
-
-  static const PageInfo<ConfirmPaymentRouteArgs> page =
-      PageInfo<ConfirmPaymentRouteArgs>(name);
-}
-
-class ConfirmPaymentRouteArgs {
-  const ConfirmPaymentRouteArgs({
-    this.key,
-    required this.orderId,
-  });
-
-  final Key? key;
-
-  final int orderId;
-
-  @override
-  String toString() {
-    return 'ConfirmPaymentRouteArgs{key: $key, orderId: $orderId}';
-  }
-}
-
-/// generated route for
-/// [FavoritesScreen]
-class FavoritesRoute extends PageRouteInfo<void> {
-  const FavoritesRoute({List<PageRouteInfo>? children})
-      : super(
-          FavoritesRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'FavoritesRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [HomeProductScreen]
 class HomeProductRoute extends PageRouteInfo<HomeProductRouteArgs> {
   HomeProductRoute({
@@ -612,20 +528,6 @@ class HomeProductRouteArgs {
   String toString() {
     return 'HomeProductRouteArgs{key: $key, isFromSearch: $isFromSearch, incomingProduct: $incomingProduct, incomingProductId: $incomingProductId}';
   }
-}
-
-/// generated route for
-/// [HomeRouterScreen]
-class HomeRouterRoute extends PageRouteInfo<void> {
-  const HomeRouterRoute({List<PageRouteInfo>? children})
-      : super(
-          HomeRouterRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'HomeRouterRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -881,44 +783,6 @@ class ProductRouteArgs {
   @override
   String toString() {
     return 'ProductRouteArgs{key: $key, incomingNavIndex: $incomingNavIndex, incomingProduct: $incomingProduct, isFromSearch: $isFromSearch, incomingProductId: $incomingProductId}';
-  }
-}
-
-/// generated route for
-/// [ScannerScreen]
-class ScannerRoute extends PageRouteInfo<ScannerRouteArgs> {
-  ScannerRoute({
-    Key? key,
-    required OrderDetailsDto order,
-    List<PageRouteInfo>? children,
-  }) : super(
-          ScannerRoute.name,
-          args: ScannerRouteArgs(
-            key: key,
-            order: order,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'ScannerRoute';
-
-  static const PageInfo<ScannerRouteArgs> page =
-      PageInfo<ScannerRouteArgs>(name);
-}
-
-class ScannerRouteArgs {
-  const ScannerRouteArgs({
-    this.key,
-    required this.order,
-  });
-
-  final Key? key;
-
-  final OrderDetailsDto order;
-
-  @override
-  String toString() {
-    return 'ScannerRouteArgs{key: $key, order: $order}';
   }
 }
 

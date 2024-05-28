@@ -20,9 +20,6 @@ class ProductsService with ListenableServiceMixin {
 
   ProductsService() {
     listenToReactiveValues([
-      _popularProducts,
-      _latestProducts,
-      _lastViewedProducts,
       _cartData,
       _postersList,
       _productsQuantity,
@@ -31,12 +28,6 @@ class ProductsService with ListenableServiceMixin {
     ]);
   }
 
-  final ReactiveValue<ProductsPagination?> _popularProducts =
-      ReactiveValue(null);
-  final ReactiveValue<ProductsPagination?> _latestProducts =
-      ReactiveValue(null);
-  final ReactiveValue<ProductsPagination?> _lastViewedProducts =
-      ReactiveValue(null);
   final ReactiveValue<ProductsPagination?> _specificProducts =
       ReactiveValue(null);
   final ReactiveValue<CartDto?> _cartData = ReactiveValue(null);
@@ -54,9 +45,6 @@ class ProductsService with ListenableServiceMixin {
 
   bool? get productIn => _productIn.value;
 
-  ProductsPagination? get popularProducts => _popularProducts.value;
-  ProductsPagination? get latestProducts => _latestProducts.value;
-  ProductsPagination? get lastViewedProducts => _lastViewedProducts.value;
   ProductsPagination? get specificProducts => _specificProducts.value;
   CartDto? get cartData => _cartData.value;
   List<TextEditingController> get productsQuantity => _productsQuantity.value;
@@ -66,63 +54,6 @@ class ProductsService with ListenableServiceMixin {
 
   StreamController<double> controller = StreamController<double>();
   Stream? stream;
-
-  // Future<void> fetchProductsOfDay() async {
-  //   try {
-  //     final res = await _productsRepository.fetchProductsOfDay();
-  //     _productsOfDay.value = res;
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
-
-  Future<int> fetchPopular({String? url}) async {
-    try {
-      final res = await _productsRepository.fetchPopular(PaginationRequest(),url: url);
-      if (url != null) {
-        popularProducts?.next = res.next;
-        popularProducts?.results?.addAll(res.results!);
-
-      } else {
-        _popularProducts.value = res;
-      }
-      return res.results!.length;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> fetchLastViewed() async {
-    try {
-      final res = await _productsRepository.fetchLastViewed();
-      _lastViewedProducts.value = res;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> fetchLatest() async {
-    try {
-      final res = await _productsRepository.fetchLatest();
-      _latestProducts.value = res;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  // Future<void> fetchRecs({String? url}) async {
-  //   try {
-  //     final res = await _productsRepository.fetchRecs(url: url);
-  //     if (url != null) {
-  //       _popularProducts.value?.next = res.next;
-  //       _popularProducts.value?.singleResults?.addAll(res.singleResults!);
-  //     } else {
-  //       _popularProducts.value = res;
-  //     }
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
 
   Future<ProductDto> fetchProductById(int id) async {
     try {
@@ -164,23 +95,12 @@ class ProductsService with ListenableServiceMixin {
     try {
       await _productsRepository.addToCart(inn,request);
 
-      if (popularProducts != null) {
-        popularProducts!.results!
-            .firstWhereOrNull((element) => element.id == productId)
-            ?.inCart = true;
-      }
-
       if (specificProducts != null) {
         specificProducts!.results!
             .firstWhereOrNull((element) => element.id == productId)
             ?.inCart = true;
       }
 
-      if (lastViewedProducts != null) {
-        lastViewedProducts!.results!
-            .firstWhereOrNull((element) => element.id == productId)
-            ?.inCart = true;
-      }
 
       if ( product?.id == productId) {
 
@@ -198,25 +118,10 @@ class ProductsService with ListenableServiceMixin {
     try {
       AddCartRequest request = AddCartRequest(cartProductsIds: ids);
       await _productsRepository.delFromCart(inn,request);
-      for (var id in ids) {
-        if (popularProducts != null) {
-          popularProducts!.results!
-              .firstWhereOrNull((element) => element.id == id)
-              ?.inCart = false;
-        }
-      }
 
       for (var id in ids) {
         if (specificProducts != null) {
           specificProducts!.results!
-              .firstWhereOrNull((element) => element.id == id)
-              ?.inCart = false;
-        }
-      }
-
-      for (var id in ids) {
-        if (lastViewedProducts != null) {
-          lastViewedProducts!.results!
               .firstWhereOrNull((element) => element.id == id)
               ?.inCart = false;
         }
@@ -244,48 +149,6 @@ class ProductsService with ListenableServiceMixin {
     }
   }
 
-  Future<void> addToFav(int productId) async {
-    AddCartRequest request = AddCartRequest(productId: productId);
-    try {
-      await _productsRepository.addToFav(request);
-      // if (productsOfDay != null) {
-      //   productsOfDay!.results!
-      //       .firstWhereOrNull((element) => element.id == productId)
-      //       ?.infav = true;
-      // }
-      fetchFavorites();
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> delFromFav(int productId) async {
-    AddCartRequest request = AddCartRequest(productId: productId);
-    try {
-      await _productsRepository.delFromFav(request);
-      fetchFavorites();
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> fetchPosters() async {
-    try {
-      final res = await _productsRepository.fetchPosters();
-      _postersList.addAll(res);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> fetchFavorites() async {
-    try {
-      final res = await _productsRepository.fetchFavorites();
-      _favorites.value = res;
-    } catch (e) {
-      rethrow;
-    }
-  }
 
   Future<ProductsPagination> fetchByPagination(String url) async {
     try {
@@ -323,19 +186,4 @@ class ProductsService with ListenableServiceMixin {
     }
   }
 
-  Future<int> loadMorePopularProducts() async {
-    try {
-      final res = await fetchByPagination(popularProducts!.next!);
-      popularProducts!.next = res.next;
-      if (res.results != null) {
-        popularProducts?.results?.addAll(res.results!);
-      }
-      if (res.singleResults != null) {
-        popularProducts?.singleResults?.addAll(res.singleResults!);
-      }
-      return res.results?.length ?? res.singleResults!.length;
-    } catch (e) {
-      rethrow;
-    }
-  }
 }

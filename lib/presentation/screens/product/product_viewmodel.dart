@@ -187,25 +187,6 @@ class ProductViewModel extends ReactiveViewModel {
     router.navigate(const CartRoute());
   }
 
-  addToFav() async {
-    try {
-      await _productsService.addToFav(product!.id!);
-      product!.infav = true;
-      notifyListeners();
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  delFromFav() async {
-    try {
-      await _productsService.delFromFav(product!.id!);
-      product!.infav = false;
-      notifyListeners();
-    } catch (e) {
-      print(e);
-    }
-  }
 
   changeCounInCart() async {
     try {

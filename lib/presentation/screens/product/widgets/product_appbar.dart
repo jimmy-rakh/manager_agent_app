@@ -70,50 +70,6 @@ class ProductAppBar extends ViewModelWidget<ProductViewModel> {
               iconSize: 20,
               itemBuilder: (context) {
                 return [
-                  // PopupMenuItem(
-                  //   onTap: viewModel.showTemplate,
-                  //   child: Row(
-                  //     children: [
-                  //       Opacity(
-                  //           opacity: viewModel.isBusy ? .5 : 1,
-                  //           child: Icon(
-                  //             IconlyLight.paper_plus,
-                  //             color: isDarkModeEnabled(context)
-                  //                 ? AppColors.textDark
-                  //                 : AppColors.textLight,
-                  //           )),
-                  //       horizontalSpace10,
-                  //       Text(
-                  //         'common.add_to_template'.tr(),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-                  PopupMenuItem(
-                    onTap: viewModel.isBusy
-                        ? null
-                        : viewModel.product?.infav ?? false
-                            ? viewModel.delFromFav
-                            : viewModel.addToFav,
-                    child: Row(
-                      children: [
-                        Opacity(
-                            opacity: viewModel.isBusy ? .5 : 1,
-                            child: Icon(
-                              viewModel.product?.infav ?? false
-                                  ? IconlyBold.heart
-                                  : IconlyLight.heart,
-                              color: isDarkModeEnabled(context)
-                                  ? AppColors.textDark
-                                  : AppColors.textLight,
-                            )),
-                        horizontalSpace10,
-                        Text(
-                          'common.add_like'.tr(),
-                        ),
-                      ],
-                    ),
-                  ),
                   PopupMenuItem(
                     onTap: viewModel.onShare,
                     child: Row(

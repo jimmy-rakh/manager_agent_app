@@ -14,56 +14,6 @@ class OrderActionWidget extends ViewModelWidget<OrderDetailsViewModel> {
 
   @override
   Widget build(BuildContext context, OrderDetailsViewModel viewModel) {
-    if (viewModel.order?.status == OrderStatuses.needRework.cc) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AppButton(
-              width: ScreenSize.width *  .4,
-              margin: EdgeInsets.fromLTRB(12, 12, 12, ScreenSize.height * .1),
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              borderRadius: BorderRadius.circular(12),
-              fillColor: Theme.of(context).primaryColor,
-              text: 'orders.continue'.tr(),
-              textStyle: Theme.of(context).textTheme.titleSmall!,
-              onPressed: viewModel.submitOrderById),
-          AppButton(
-              width: ScreenSize.width *  .4,
-              margin: EdgeInsets.fromLTRB(12, 12, 12, ScreenSize.height * .1),
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              borderRadius: BorderRadius.circular(12),
-              fillColor: AppColors.blood,
-              text: 'orders.cancel'.tr(),
-              textStyle: Theme.of(context).textTheme.titleSmall!,
-              onPressed: viewModel.cancelOrderById)
-        ],
-      );
-    }
-
-    if ([OrderStatuses.onWay.cc, OrderStatuses.inPickup.cc]
-        .contains(viewModel.order?.status)) {
-      return AppButton(
-          width: double.maxFinite,
-          margin: EdgeInsets.fromLTRB(24, 24, 24, ScreenSize.height * .1),
-          padding: const EdgeInsets.symmetric(vertical: 15),
-          borderRadius: BorderRadius.circular(12),
-          fillColor: Theme.of(context).primaryColor,
-          text: 'common.confirm'.tr(),
-          textStyle: Theme.of(context).textTheme.titleSmall!,
-          onPressed: viewModel.onConfirm);
-    }
-
-    if (viewModel.order?.status == OrderStatuses.waitPay.cc) {
-      return AppButton(
-          width: double.maxFinite,
-          margin: EdgeInsets.fromLTRB(24, 24, 24, ScreenSize.height * .1),
-          padding: const EdgeInsets.symmetric(vertical: 15),
-          borderRadius: BorderRadius.circular(12),
-          fillColor: Theme.of(context).primaryColor,
-          text: 'common.pay'.tr(),
-          textStyle: Theme.of(context).textTheme.titleSmall!,
-          onPressed: viewModel.onPay);
-    }
 
     if (viewModel.order?.status == OrderStatuses.completed.cc) {
       return Padding(
@@ -80,22 +30,6 @@ class OrderActionWidget extends ViewModelWidget<OrderDetailsViewModel> {
             borderColor: Colors.black,
             icon: IconlyBold.paper_download,
           )),
-          if (viewModel.order!.orderDetails!
-              .any((element) => element.cartproduct!.product!.hasComment! == false)) ...[
-            horizontalSpace16,
-            Expanded(
-              flex: 2,
-              child: AppButton(
-                text: 'orders.leave_review'.tr(),
-                onPressed: viewModel.onAddReviewTapped,
-                borderRadius: BorderRadius.circular(12),
-                fillColor: Theme.of(context).cardColor,
-                borderColor: Colors.black,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              ),
-            ),
-          ]
         ]),
       );
     }

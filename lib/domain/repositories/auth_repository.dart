@@ -40,13 +40,7 @@ abstract class AuthRepository {
 
   Future<DefaultResponse> editUserData(ChangeUserStatusRequest request);
 
-  Future<DefaultResponse> uploadImage(String imageData);
-
-  Future<DefaultResponse> deleteImage();
-
   Future<DefaultResponse> logOut();
-
-  Future<BalanceDto> fetchBalance();
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -141,23 +135,6 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
-  Future<DefaultResponse> uploadImage(String imageData) async {
-    try {
-      return await _authApi.uploadImage(imageData);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<DefaultResponse> deleteImage() async {
-    try {
-      return await _authApi.deleteImage();
-    } catch (e) {
-      rethrow;
-    }
-  }
 
   @override
   Future<DefaultResponse> logOut() async {
@@ -173,12 +150,5 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
-  Future<BalanceDto> fetchBalance() async {
-    try {
-      return await _authApi.fetchBalance();
-    } catch (e) {
-      rethrow;
-    }
-  }
+
 }

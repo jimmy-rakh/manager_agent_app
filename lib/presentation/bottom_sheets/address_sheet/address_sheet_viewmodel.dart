@@ -44,12 +44,5 @@ class AddressSheetViewModel extends ReactiveViewModel {
       );
       return;
     }
-    final res = await _orderService.fetchDeliveryCost(address.id!);
-
-      Navigator.pop(
-        router.navigatorKey.currentContext!,
-        res.cost,
-
-    );
   }
 }

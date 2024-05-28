@@ -23,14 +23,6 @@ abstract class LocalStorage {
 
   Future<void> clear();
 
-  void addWaitpayOrder(List<int> orderIds);
-
-  List<int> getWaitpayOrders();
-
-  void addWaitComment(List<int> orderIds);
-
-  List<int> getWaitComment();
-
   void setCategories(List<CategoriesDto> categories);
 
   List<CategoriesDto> getCategories();

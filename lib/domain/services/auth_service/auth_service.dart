@@ -140,63 +140,12 @@ class AuthService with ListenableServiceMixin {
     }
   }
 
-  Future<void> uploadImage(File file) async {
-    // final crop = cropKey.currentState;
-    // final area = crop!.area;
-    // final sampledFile = await ImageCrop.sampleImage(
-    //   file: File(file.path),
-    //   preferredWidth: 1024,
-    //   preferredHeight: 1024,
-    // );
-
-    // final croppedFile = await ImageCrop.cropImage(
-    //   file: sampledFile,
-    //   area: area!,
-    // );
-    try {
-      final res = await _authRepository.uploadImage(
-          "data:image/png;base64,${base64Encode(file.readAsBytesSync())}");
-      if (res.success) {
-        await getProfileData();
-        // TODO NavigationService.back();
-      } else {
-        // TODO NavigationService.showErrorToast(
-        //     'Не удалось загрузить фотографию попробуйте еще раз!');
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> deleteImage() async {
-    try {
-      final res = await _authRepository.deleteImage();
-      if (res.success) {
-        await getProfileData();
-        // TODO Navigator.pop(NavigationService.navigatorKey.currentContext!);
-      } else {
-        // TODO NavigationService.showErrorToast(
-        //     'Не удалось удалить фотографию попробуйте еще раз!');
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
 
   logOut() async {
     try {
       await _authRepository.logOut();
       _userData.value = null;
       // TODO NavigationService.newRootScreen(Routes.splashScreen);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> fetchBalance() async {
-    try {
-      final res = await _authRepository.fetchBalance();
-      _balance.value = res;
     } catch (e) {
       rethrow;
     }

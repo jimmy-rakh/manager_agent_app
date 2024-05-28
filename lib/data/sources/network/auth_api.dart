@@ -34,12 +34,6 @@ abstract class AuthApi {
   Future<DefaultResponse> createUser(CreateUserRequest request);
 
   Future<DefaultResponse> editUserData(ChangeUserStatusRequest request);
-
-  Future<DefaultResponse> uploadImage(String imageData);
-
-  Future<DefaultResponse> deleteImage();
-
-  Future<BalanceDto> fetchBalance();
 }
 
 class AuthApiImpl extends AuthApi {
@@ -145,39 +139,6 @@ class AuthApiImpl extends AuthApi {
           data: request.toJson());
 
       return DefaultResponse.fromJson(res);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<DefaultResponse> uploadImage(String imageData) async {
-    try {
-      final res = await _bingoApi.post(NetworkConstants.uploadImage,
-          data: jsonEncode({'image': imageData}));
-      return DefaultResponse.fromJson(res);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<DefaultResponse> deleteImage() async {
-    try {
-      final res = await _bingoApi.delete(
-        NetworkConstants.uploadImage,
-      );
-      return DefaultResponse.fromJson(res);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<BalanceDto> fetchBalance() async {
-    try {
-      final res = await _bingoApi.get(NetworkConstants.balance);
-      return BalanceDto.fromJson(res);
     } catch (e) {
       rethrow;
     }

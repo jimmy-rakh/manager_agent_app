@@ -15,12 +15,6 @@ abstract class OrderApi {
   Future<OrderDetailsDto> createOrder(CreateOrderDto request);
   Future<UserOrdersDto> fetchOrders(int? inn, {String? url, String? status});
   Future<OrderDetailsDto> fetchOrderById(String orderId);
-  Future<void> submitOrderById(String orderId);
-  Future<void> cancelOrderById(String orderId);
-  Future addReview(AddReviewRequest request);
-  Future<DeliveryCostDto> fetchDeliveryCost(int addressId);
-  Future<void> paySubmit(PaySubmitModel data);
-  Future<void> confirmOrder(ConfirmOrderRequest request);
 }
 
 class OrderApiImpl extends OrderApi {

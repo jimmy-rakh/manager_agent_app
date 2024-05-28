@@ -54,16 +54,6 @@ class AccountScreen extends StatelessWidget {
                   onTap: () => viewModel.toPage(const AddressRoute()),
                 ),
                 CustomMenuItem(
-                  title: 'menu.favorites'.tr(),
-                  icon: IconlyLight.paper,
-                  onTap: () => viewModel.toPage(const FavoritesRoute()),
-                ),
-                // CustomMenuItem(
-                //     title: 'menu.my_reviews'.tr(),
-                //     icon: IconlyLight.chat,
-                //     isActive: viewModel.userStatus == UserStatus.haveToLogIn,
-                //     onTap: () {}),
-                CustomMenuItem(
                   title: 'menu.settings'.tr(),
                   icon: IconlyLight.setting,
                   onTap: () => viewModel.toPage(const SettingsRoute()),

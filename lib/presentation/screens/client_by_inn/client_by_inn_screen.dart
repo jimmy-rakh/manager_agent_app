@@ -86,7 +86,7 @@ class ClientByInnScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: ListView(children: [
                     const Padding(
-                      padding: EdgeInsets.only(left: 20, top: 100),
+                      padding: EdgeInsets.only(left: 20, top: 50),
                       child: Text(
                         'Информация о Клиенте',
                         style: TextStyle(
@@ -101,7 +101,7 @@ class ClientByInnScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             SizedBox(
-                              width:MediaQuery.of(context).size.width * .75,
+                              width:MediaQuery.of(context).size.width * .7,
                               child: AppTextField(
                                   textInputType: TextInputType.number,
                                   fieldController: viewModel.usernameController,
@@ -109,7 +109,7 @@ class ClientByInnScreen extends StatelessWidget {
                             ),
                             horizontalSpace5,
                             AppButton(
-                                width:MediaQuery.of(context).size.width * .12,
+                                width:MediaQuery.of(context).size.width * .17,
                                 text: 'Поиск',
                                 textStyle: Theme.of(context).textTheme.bodyLarge!,
                                 padding: const EdgeInsets.symmetric(vertical: 14),

@@ -134,6 +134,7 @@
     "call_to_support": "Qo'llab-quvvatlash xizmatiga qo'ng'iroq qilish"
   },
   "orders": {
+    "null": "Неуказано",
     "order_number": "{} chi buyurtma",
     "order_pay": "{} chi buyurtmani to'lash",
     "orders_title": "Buyurtmalar",

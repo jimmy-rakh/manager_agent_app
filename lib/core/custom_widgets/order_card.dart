@@ -6,6 +6,8 @@ import 'package:bingo/core/styles/colors.dart';
 import 'package:bingo/core/utils/spaces.dart';
 import 'package:bingo/core/extensions/order.dart';
 
+import '../../data/models/orders/response/orders.dart';
+
 class OrderCard extends StatelessWidget {
   const OrderCard({
     super.key,
@@ -13,7 +15,7 @@ class OrderCard extends StatelessWidget {
     required this.onTap,
   });
 
-  final OrderDto order;
+  final Results order;
   final void Function(int) onTap;
 
   @override
@@ -38,12 +40,25 @@ class OrderCard extends StatelessWidget {
                   '№ ${order.id}',
                   style: Theme.of(context).textTheme.titleMedium,
                 )),
-                Text(
-                  'common.products_count'.tr(args: [order.count.toString()]),
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelMedium!
-                      .copyWith(color: Colors.grey),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    order.fromRemoteManager == true ? Text(
+                      "Agent",
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelMedium!
+                          .copyWith(color: Colors.blue),
+                    ): const SizedBox(),
+                    Text(
+                      'common.products_count'.tr(args: [order.count.toString()]),
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelMedium!
+                          .copyWith(color: Colors.grey),
+                    ),
+                  ],
                 )
               ],
             ),

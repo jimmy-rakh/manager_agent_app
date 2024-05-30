@@ -4,7 +4,11 @@ import 'package:bingo/app/router.dart';
 import 'package:bingo/presentation/screens/nav_bar/navbar_viewmodel.dart';
 import 'package:bingo/presentation/screens/nav_bar/widgets/bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
 import 'package:stacked/stacked.dart' hide TabsRouter;
+
+import '../../../core/styles/colors.dart';
+import '../../../core/utils/is_dark.dart';
 
 @RoutePage()
 class NavBarScreen extends StatelessWidget {
@@ -28,7 +32,18 @@ class NavBarScreen extends StatelessWidget {
               ],
               builder: (context, children, tabsRouter) => Scaffold(
                 appBar: AppBar(
-                  leading: const BackButton(),
+                  leading:  GestureDetector(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      size: 30,
+                      IconlyLight.arrow_left_2,
+                      color: isDarkModeEnabled(context)
+                          ? AppColors.textDark
+                          : AppColors.textLight,
+                    ),
+                  ),
                   centerTitle: false,
                   title:  Text(viewModel.client?.companyName ?? ""),),
                     resizeToAvoidBottomInset: true,

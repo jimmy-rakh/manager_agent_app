@@ -124,11 +124,9 @@ class ProductScreen extends StatelessWidget {
                                                   ),
                                                 ),
                                                 horizontalSpace10,
-                                                SizedBox(width: 180,
-                                                child: viewModel.product == null || viewModel.product!.subcategories!.isEmpty ? const SizedBox() : Text(viewModel.product?.subcategories
+                                                viewModel.product == null || viewModel.product!.subcategories!.isEmpty ? const SizedBox() : Text(viewModel.product?.subcategories
                                                     ?.first.name ??
-                                                    '',maxLines: 1,),
-                                                )
+                                                    '',maxLines: 1,)
                                               ],
                                             ),
                                             verticalSpace12,

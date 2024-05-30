@@ -32,12 +32,12 @@ class OrderDetailsScreen extends StatelessWidget {
                     margin: const EdgeInsets.all(16),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color: viewModel.order!.status!.orederColor(),
+                        color: viewModel.order?.status!.orederColor(),
                         borderRadius: BorderRadius.circular(4)),
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     child: Text(
-                      'orders.${viewModel.order!.status!.toLowerCase()}'.tr(),
+                      'orders.${viewModel.order?.status!.toLowerCase()}'.tr(),
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!

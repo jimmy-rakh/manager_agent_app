@@ -18,8 +18,9 @@ class ClientByInnViewModel extends ReactiveViewModel {
 
 
 
-  void onReady() {
-
+  void onReady(context) {
+    final currentWidth = MediaQuery.of(context).size.width;
+print(currentWidth.toString());
   }
 
   getData() async {

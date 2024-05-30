@@ -43,7 +43,7 @@ class OrderInfoView extends ViewModelWidget<OrderDetailsViewModel> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     DefaultImageContainer(
-                        imageUrl: viewModel.order!.manager?.avatarUrl,
+                        imageUrl: viewModel.order!.remoteManager?.avatarUrl,
                         height: ScreenSize.height * .055,
                         backgroundColor: AppColors.white,
                         radius: 12),
@@ -51,7 +51,7 @@ class OrderInfoView extends ViewModelWidget<OrderDetailsViewModel> {
                     SizedBox(
                       width: ScreenSize.width * .35,
                       child: Text(
-                        viewModel.order!.manager?.fullName ?? '',
+                        viewModel.order!.remoteManager?.fullName ?? '',
                         maxLines: 2,
                       ),
                     ),
@@ -63,7 +63,7 @@ class OrderInfoView extends ViewModelWidget<OrderDetailsViewModel> {
                       onTap: () {
                         UrlLauncher.launchUrl(
                             Uri.parse(
-                                'https://t.me/${viewModel.order?.manager?.messengers?.first}'),
+                                'https://t.me/${viewModel.order?.remoteManager?.messengers?.first}'),
                             mode: LaunchMode.externalApplication);
                       },
                       child: Container(
@@ -87,7 +87,7 @@ class OrderInfoView extends ViewModelWidget<OrderDetailsViewModel> {
                       onTap: () {
                         UrlLauncher.launchUrl(Uri(
                           scheme: "tel",
-                          path: viewModel.order?.manager?.phoneNumbers?.first,
+                          path: viewModel.order?.remoteManager?.phoneNumbers?.first,
                         ));
                       },
                       child: Container(
@@ -209,7 +209,7 @@ class OrderInfoView extends ViewModelWidget<OrderDetailsViewModel> {
                 children: [
                   Text('common.address'.tr()),
                   horizontalSpace25,
-                  Flexible(child: Text(viewModel.order!.address!))
+                  Flexible(child: Text("${viewModel.order?.address}" ?? ''))
                 ],
               ),
               verticalSpace10,

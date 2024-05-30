@@ -1,5 +1,5 @@
 class NetworkConstants {
-  static String okansBaseUrl = 'https://test-api.okans.uz';
+  static String okansBaseUrl = 'https://texnostore.uz';
   static String baseApiUrl = 'https://texnostore.uz/v1/rmanagers/';
   static Duration connectTimeout = const Duration(seconds: 10000);
   static Duration receiveTimeout = const Duration(seconds: 10000);
@@ -36,6 +36,7 @@ class NetworkConstants {
   static String fetchFavorites = '${baseApiUrl}favourites/';
   static String fetchPreorders = '${baseApiUrl}preorders/';
   static String orders = '${baseApiUrl}orders/';
+  static String order = '${baseApiUrl}order/';
   static String fetchBrands = '${baseApiUrl}brands';
   static String cancelOrder = '${baseApiUrl}cancel_order/';
   static String addPreorder = '${baseApiUrl}add_preorder/';

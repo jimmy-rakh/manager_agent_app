@@ -1,14 +1,13 @@
 import 'package:bingo/app/locator.dart';
 import 'package:bingo/app/router.dart';
 import 'package:bingo/core/enum/user_status.dart';
-import 'package:bingo/data/models/orders/response/order_list_dto.dart';
 import 'package:bingo/domain/services/auth_service/auth_service.dart';
 import 'package:bingo/domain/services/navigation_service/navigation_service.dart';
 import 'package:bingo/domain/services/order_service/order_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../data/models/orders/response/orders.dart';
 import '../../../domain/services/client_service.dart';
 
 class OrdersScreenModel extends ReactiveViewModel {
@@ -26,9 +25,9 @@ class OrdersScreenModel extends ReactiveViewModel {
   late PageController pageController;
   ScrollController scrollController = ScrollController();
   UserStatus get userStatus => _authService.userStatus;
-  UserOrdersDto? get userOrders => _orderService.userOrders;
-  UserOrdersDto? get activeOrders => _orderService.activeOrders;
-  UserOrdersDto? get completedOrders => _orderService.completedOrders;
+  OrdersDto? get userOrders => _orderService.userOrders;
+  OrdersDto? get activeOrders => _orderService.activeOrders;
+  OrdersDto? get completedOrders => _orderService.completedOrders;
 
   onReady({TickerProvider? mixin}) async {
     if (mixin != null) tabController = TabController(length: 3, vsync: mixin);

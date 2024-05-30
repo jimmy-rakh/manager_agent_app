@@ -9,10 +9,12 @@ import 'package:bingo/data/models/orders/response/order_list_dto.dart';
 import 'package:bingo/data/sources/local/storage.dart';
 import 'package:bingo/data/sources/network/order_api.dart';
 
+import '../../data/models/orders/response/orders.dart';
+
 abstract class OrderRepository {
   Future<OrderDetailsDto> createOrder(int? inn,CreateOrderDto request);
-  Future<UserOrdersDto> fetchOrders(int? inn,{String? url, String? status});
-  Future<OrderDetailsDto> fetchOrderById(String orderId);
+  Future<OrdersDto> fetchOrders(int? inn,{String? url, String? status});
+  Future<OrderDetailsDto> fetchOrderById(int? inn,String orderId);
 }
 
 class OrderRepositoryImpl implements OrderRepository {
@@ -29,7 +31,7 @@ class OrderRepositoryImpl implements OrderRepository {
   }
 
   @override
-  Future<UserOrdersDto> fetchOrders(int? inn,{String? url, String? status}) async {
+  Future<OrdersDto> fetchOrders(int? inn,{String? url, String? status}) async {
     try {
       return await _api.fetchOrders( inn,url: url, status: status);
     } catch (e) {
@@ -38,9 +40,9 @@ class OrderRepositoryImpl implements OrderRepository {
   }
 
   @override
-  Future<OrderDetailsDto> fetchOrderById(String orderId) async {
+  Future<OrderDetailsDto> fetchOrderById(int? inn,String orderId) async {
     try {
-      return await _api.fetchOrderById(orderId);
+      return await _api.fetchOrderById(inn,orderId);
     } catch (e) {
       rethrow;
     }

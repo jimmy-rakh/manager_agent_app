@@ -26,7 +26,7 @@ class ProductSerctionView extends ViewModelWidget<OrderDetailsViewModel> {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               verticalSpace12,
-              for (OrderProductsDto order in viewModel.order!.orderDetails!) ...[
+              for (OrderDetails order in viewModel.order!.orderDetails!) ...[
                 CartProductWidget(
                   product: order.cartproduct!.product!,
                   quantity: order.cartproduct!.quantity,

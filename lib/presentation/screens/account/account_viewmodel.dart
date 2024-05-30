@@ -12,10 +12,11 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../data/models/search/search_request.dart';
 import '../../../data/models/search/search_response.dart';
+import '../../../data/sources/local/storage.dart';
 
 class AccountViewModel extends ReactiveViewModel {
   final AuthService _authService = getIt();
-
+  final _localStorage = getIt<LocalStorageImpl>();
   @override
   List<ListenableServiceMixin> get listenableServices => [_authService];
 
@@ -52,7 +53,8 @@ class AccountViewModel extends ReactiveViewModel {
 
   logOut() async {
     try {
-      await _authService.logOut();
+      await _localStorage.clear();
+      router.replaceAll([const SplashRoute()]);
     } catch (e) {
       NavigationService.showErrorToast(e.toString());
     }

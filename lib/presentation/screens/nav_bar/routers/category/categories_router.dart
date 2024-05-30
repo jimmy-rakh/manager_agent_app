@@ -14,7 +14,7 @@ class CategoriesRouterScreen extends StatelessWidget {
     return ViewModelBuilder<CategoriesRouterViewModel>.reactive(
         viewModelBuilder: () => CategoriesRouterViewModel(),
         onViewModelReady: (viewModel) => viewModel.onReady(),
-        builder: (context, viewModel, child) => Scaffold(
+        builder: (context, viewModel, child) =>  Scaffold(
             appBar: CustomSearchAppBar(
                 isBusy: viewModel.isBusy,
                 isSearched: viewModel.isSearched,

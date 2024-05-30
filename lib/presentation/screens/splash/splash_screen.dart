@@ -19,16 +19,17 @@ class SplashScreen extends StatelessWidget {
           return const Scaffold(
               body: Center(
                   child: Column(
-            mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Hero(
                 tag: 'logo',
-                child: Text(
+                child:  Text(
                   'Agent manager',
                   style: TextStyle(
                       color: AppColors.primary,
                       fontWeight: FontWeight.w600,
-                      fontSize: 55),
+                      fontSize: 35),
                 ),
               ),
               CupertinoActivityIndicator(),

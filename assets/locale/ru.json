@@ -134,6 +134,7 @@
     "call_to_support": "Позвонить в службу поддержки"
   },
   "orders": {
+    "null": "Неуказано",
     "order_number": "Заказ №{}",
     "order_pay": "Оплата Заказа №{}",
     "orders_title": "Заказы",

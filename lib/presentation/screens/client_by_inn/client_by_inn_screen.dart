@@ -3,6 +3,7 @@ import 'package:bingo/core/utils/spaces.dart';
 import 'package:bingo/presentation/screens/client_by_inn/widgets/balance_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:iconly/iconly.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:stacked/stacked.dart';
@@ -23,7 +24,7 @@ class ClientByInnScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
         viewModelBuilder: () => ClientByInnViewModel(),
-        onViewModelReady: (viewModel) => viewModel.onReady(),
+        onViewModelReady: (viewModel) => viewModel.onReady(context),
         builder: (context, viewModel, child) {
           return KeyboardDismisser(
             child: Scaffold(
@@ -83,8 +84,10 @@ class ClientByInnScreen extends StatelessWidget {
                   ],
                 ),
                 body: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: ListView(children: [
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: ListView(
+                      shrinkWrap: true,
+                      children: [
                     const Padding(
                       padding: EdgeInsets.only(left: 20, top: 50),
                       child: Text(
@@ -100,16 +103,18 @@ class ClientByInnScreen extends StatelessWidget {
                       child: Center(
                         child: Row(
                           children: [
-                            SizedBox(
-                              width:MediaQuery.of(context).size.width * .7,
-                              child: AppTextField(
-                                  textInputType: TextInputType.number,
-                                  fieldController: viewModel.usernameController,
-                                  label: 'Ввидите ИНН Клиента'),
+                            Expanded(
+                              child: SizedBox(
+                                width:MediaQuery.of(context).size.width * .7,
+                                child: AppTextField(
+                                    textInputType: TextInputType.number,
+                                    fieldController: viewModel.usernameController,
+                                    label: 'Ввидите ИНН Клиента'),
+                              ),
                             ),
                             horizontalSpace5,
                             AppButton(
-                                width:MediaQuery.of(context).size.width * .17,
+                                width:MediaQuery.of(context).size.width * .2,
                                 text: 'Поиск',
                                 textStyle: Theme.of(context).textTheme.bodyLarge!,
                                 padding: const EdgeInsets.symmetric(vertical: 14),
@@ -146,18 +151,18 @@ class ClientByInnScreen extends StatelessWidget {
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            CustomCircleImage(
-                                              size: const Size(90, 90),
-                                              imageUrl:
-                                                  viewModel.client!.avatarUrl ==
-                                                          null
-                                                      ? null
-                                                      : NetworkConstants
-                                                              .okansBaseUrl +
-                                                          viewModel.client!
-                                                              .avatarUrl!,
-                                            ),
-                                            horizontalSpace12,
+                                            // CustomCircleImage(
+                                            //   size: const Size(90, 90),
+                                            //   imageUrl:
+                                            //       viewModel.client!.avatarUrl ==
+                                            //               null
+                                            //           ? null
+                                            //           : NetworkConstants
+                                            //                   .okansBaseUrl +
+                                            //               viewModel.client!
+                                            //                   .avatarUrl!,
+                                            // ),
+                                            // horizontalSpace12,
                                             Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
@@ -207,7 +212,8 @@ class ClientByInnScreen extends StatelessWidget {
                                                             .client
                                                             ?.phoneNumbers
                                                             ?.first ??
-                                                        '')
+                                                        '',
+                                                      maxLines: 1,)
                                                   ],
                                                 ),
                                                 Row(
@@ -250,7 +256,8 @@ class ClientByInnScreen extends StatelessWidget {
                                                     horizontalSpace10,
                                                     Text(viewModel
                                                             .client?.type ??
-                                                        '')
+                                                        '',
+                                                      maxLines: 1,)
                                                   ],
                                                 ),
                                               ],
@@ -279,7 +286,7 @@ class ClientByInnScreen extends StatelessWidget {
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                                    const EdgeInsets.fromLTRB(20, 20, 20, 40),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12),
@@ -289,6 +296,7 @@ class ClientByInnScreen extends StatelessWidget {
                                     padding: const EdgeInsets.all(20),
                                     child: ListView.builder(
                                       shrinkWrap: true,
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemCount: viewModel
                                           .client?.clientBalances?.length,
                                       itemBuilder:

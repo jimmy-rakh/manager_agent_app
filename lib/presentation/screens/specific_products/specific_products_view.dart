@@ -168,7 +168,7 @@ class SpecificProductsScreen extends StatelessWidget {
                                 physics: const BouncingScrollPhysics(),
                                 gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount:currentWidth < 1400 && currentWidth > 1200 ? 4 : currentWidth < 1300 ? 3 : crossCount,
+                                    crossAxisCount:currentWidth < 1400 && currentWidth > 1200 ? 4 : currentWidth < 1300 && currentWidth > 700 ? 3 : currentWidth < 600 ? 2 : crossCount,
                                         childAspectRatio: .6,
                                         crossAxisSpacing: 16,
                                         mainAxisSpacing: 16),

@@ -17,6 +17,8 @@ import 'package:bingo/presentation/dialogs/success_order/success_order_view.dart
 import 'package:crypto/crypto.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../data/models/orders/response/orders.dart';
+
 class OrderService with ListenableServiceMixin {
   final OrderRepository _orderRepository = getIt<OrderRepositoryImpl>();
   final TemplateRepository _templateRepository =
@@ -46,10 +48,10 @@ class OrderService with ListenableServiceMixin {
   final ReactiveValue<bool> _payByWallet = ReactiveValue(false);
   final ReactiveValue<bool> _pickUp = ReactiveValue(false);
   final ReactiveValue<bool> _payByCash = ReactiveValue(false);
-  final ReactiveValue<UserOrdersDto?> _userOrders = ReactiveValue(null);
-  final ReactiveValue<UserOrdersDto?> _unpaidOrders = ReactiveValue(null);
-  final ReactiveValue<UserOrdersDto?> _completedOrders = ReactiveValue(null);
-  final ReactiveValue<UserOrdersDto?> _activeOrders = ReactiveValue(null);
+  final ReactiveValue<OrdersDto?> _userOrders = ReactiveValue(null);
+  final ReactiveValue<OrdersDto?> _unpaidOrders = ReactiveValue(null);
+  final ReactiveValue<OrdersDto?> _completedOrders = ReactiveValue(null);
+  final ReactiveValue<OrdersDto?> _activeOrders = ReactiveValue(null);
   final ReactiveValue<OrderDetailsDto?> _lastCreatedOrder = ReactiveValue(null);
 
   AddressModel? get selectedAddress => _selectedAddress.value;
@@ -59,10 +61,10 @@ class OrderService with ListenableServiceMixin {
   bool get payByWallet => _payByWallet.value;
   bool get pickUp => _pickUp.value;
   bool get payByCash => _payByCash.value;
-  UserOrdersDto? get userOrders => _userOrders.value;
-  UserOrdersDto? get unpaidOrders => _unpaidOrders.value;
-  UserOrdersDto? get completedOrders => _completedOrders.value;
-  UserOrdersDto? get activeOrders => _activeOrders.value;
+  OrdersDto? get userOrders => _userOrders.value;
+  OrdersDto? get unpaidOrders => _unpaidOrders.value;
+  OrdersDto? get completedOrders => _completedOrders.value;
+  OrdersDto? get activeOrders => _activeOrders.value;
   OrderDetailsDto? get lastCreatedOrder => _lastCreatedOrder.value;
 
   createOrder(int? inn,) async {
@@ -122,9 +124,9 @@ class OrderService with ListenableServiceMixin {
   }
 
 
-  Future<OrderDetailsDto> getOrder(int orderId) async {
+  Future<OrderDetailsDto> getOrder(int? inn,int orderId) async {
     try {
-      return await _orderRepository.fetchOrderById(orderId.toString());
+      return await _orderRepository.fetchOrderById(inn,orderId.toString());
     } catch (e) {
       rethrow;
     }
